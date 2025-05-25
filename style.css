@@ -1,45 +1,10 @@
-/* main body styling */
+/* Body and background */
 body {
     font-family: sans-serif;
-    padding: 40px;
-    background-color: #f8f8f8;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    margin: 0;
+    background: linear-gradient(to right, #e0f7fa, #ffffff);
     min-height: 100vh;
-}
-
-.container {
-    text-align: center;
-    max-width: 600px;
-}
-
-.intro, .how-it-works {
-    margin-bottom: 20px;
-    font-size: 16px;
-    color: #333;
-}
-
-.input-group {
-    margin-top: 20px;
-}
-
-input {
-    padding: 10px;
-    width: 300px;
-    font-size: 16px;
-}
-
-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    margin-left: 10px;
-}
-
-#confirmation {
-    margin-top: 20px;
-    font-weight: bold;
-    color: green;
+    display: flex;
 }
 
 /* Sidebar styling */
@@ -64,12 +29,13 @@ button {
 }
 
 .sidebar .dropdown-content {
-    display: block;
+    display: none;
     flex-direction: column;
     gap: 10px;
+    margin-top: 10px;
 }
 
-.sidebar a {
+.sidebar .dropdown-content a {
     display: block;
     color: white;
     text-decoration: none;
@@ -77,13 +43,58 @@ button {
     font-weight: 500;
 }
 
-.sidebar a:hover {
+.sidebar .dropdown-content a:hover {
     text-decoration: underline;
 }
 
-/* Push main content to the right */
-main.content {
+/* Main content pushed to the right */
+main.content, .container {
     margin-left: 220px;
-    padding: 20px;
+    padding: 40px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    max-width: 800px;
+}
+
+/* Text styling */
+.intro, .how-it-works {
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: #333;
+}
+
+/* Input and button styling */
+.input-group {
+    margin-top: 20px;
+}
+
+input {
+    padding: 10px;
+    width: 300px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin-left: 10px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+#confirmation {
+    margin-top: 20px;
+    font-weight: bold;
+    color: green;
 }
 
