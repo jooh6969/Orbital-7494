@@ -1,25 +1,25 @@
 function submitURL() {
-    const input = document.getElementById("userInput").value;
+    let input = document.getElementById("userInput").value.trim();
     const confirmation = document.getElementById("confirmation");
 
-    // Clear previous result
     confirmation.innerText = "";
 
-    if (input.trim() === "") {
-        confirmation.innerText = "⚠️ Please enter a URL.";
-    } else {
-        // Show loading state
-        confirmation.innerText = "🔍 Checking URL, please wait...";
-
-        // Simulate backend delay, fake
-        setTimeout(() => {
-            confirmation.innerText = `✅ Result: The URL "${input}" appears to be SAFE.`;
-        }, 2000); 
+    // If user forgot protocol, add https://
+    if (!input.startsWith("http://") && !input.startsWith("https://")) {
+        input = "https://" + input;
     }
-}
 
-// Dropdown menu toggle
-function toggleMenu() {
-    const menu = document.getElementById("dropdownMenu");
-    menu.style.display = menu.style.display === "block" ? "none" : "block";
+    // Updated stricter regex
+    const urlPattern = /^(https?:\/\/)([\w\-]+\.)+[\w\-]+(\/[\w\-._~:/?#[\]@!$&'()*+,;=]*)?$/i;
+
+    if (!urlPattern.test(input)) {
+        confirmation.innerText = "❌ Invalid URL. Please enter a valid site.";
+        return;
+    }
+
+    confirmation.innerText = "🔍 Checking URL, please wait...";
+
+    setTimeout(() => {
+        confirmation.innerText = `✅ Result: The URL "${input}" appears to be SAFE.`;
+    }, 2000);
 }
