@@ -1,9 +1,20 @@
 function submitURL() {
     const input = document.getElementById("userInput").value;
+    const confirmation = document.getElementById("confirmation");
+
+    // Clear previous result
+    confirmation.innerText = "";
 
     if (input.trim() === "") {
-        document.getElementById("confirmation").innerText = "Please enter a URL.";
+        confirmation.innerText = "⚠️ Please enter a URL.";
     } else {
-        document.getElementById("confirmation").innerText = `URL received: "${input}"`;
+        // Show loading state
+        confirmation.innerText = "🔍 Checking URL, please wait...";
+
+        // Simulate backend delay, fake
+        setTimeout(() => {
+            confirmation.innerText = `✅ Result: The URL "${input}" appears to be SAFE.`;
+        }, 2000); 
     }
 }
+
