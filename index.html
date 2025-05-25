@@ -1,16 +1,28 @@
-<!DOCSTYLE html>
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Phishing detection</title>
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
-        <h1>Malicious Phishing site detection</h1>
-        
-        <input type="text" id="userInput" placeholder="Enter your URL here" autocomplete="off" autofocus>
-        <button onclick="submitURL()">Enter</button>
+<head>
+    <meta charset="UTF-8">
+    <title>Phishing Detection</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Phishing Site Detector</h1>
+        <p class="intro">
+            Phishing attacks are one of the most common and dangerous forms of online scams today. 
+            Scammers trick users into clicking fraudulent links that steal personal data or install malware.
+        </p>
+        <p class="how-it-works">
+            Our tool uses powerful Large Language Models (LLMs) to analyze URLs and messages for suspicious patterns, 
+            mimicking how a human would assess language and link structure—giving you instant, intelligent verdicts.
+        </p>
+
+        <div class="input-group">
+            <input type="text" id="userInput" placeholder="Enter your URL here" autocomplete="off" autofocus>
+            <button onclick="submitURL()">Enter</button>
+        </div>
         <p id="confirmation"></p>
-        <script src="script.js"></script>
-    </body>
+    </div>
+    <script src="script.js"></script>
+</body>
 </html>
