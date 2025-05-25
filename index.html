@@ -27,7 +27,15 @@
         </p>
 
         <div class="input-group">
-            <input type="text" id="userInput" placeholder="Enter your URL here" autocomplete="off" autofocus>
+            <input 
+              type="url"
+              id="userInput"
+              placeholder="Enter a valid URL (e.g. https://example.com)"
+              pattern="https?://.*"
+              required
+              autocomplete="off"
+              autofocus
+            />
             <button onclick="submitURL()">Enter</button>
         </div>
         <p id="confirmation"></p>
@@ -35,4 +43,5 @@
     <script src="script.js"></script>
 </body>
 </html>
+
 
