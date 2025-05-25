@@ -23,3 +23,10 @@ function submitURL() {
         confirmation.innerText = `✅ Result: The URL "${input}" appears to be SAFE.`;
     }, 2000);
 }
+
+function toggleMenu() {
+  const menu = document.getElementById("dropdownMenu");
+  if (!menu) return;
+  menu.style.display = menu.style.display === "block" ? "none" : "block";
+}
+

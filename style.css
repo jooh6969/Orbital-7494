@@ -97,3 +97,7 @@ button:hover {
     font-weight: bold;
     color: green;
 }
+
+.dropdown-content {
+  display: none;
+}
