@@ -141,6 +141,8 @@ if __name__ == "__main__":
     run(test2)
 
 def extract_features(url):
+    if not url.startswith("http://") and not url.startswith("https://"):
+        url = "http://" + url
 
     # url = clean_url(url)
     ## Length of url
