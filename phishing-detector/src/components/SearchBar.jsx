@@ -14,9 +14,10 @@ const SearchBar = () => {
     setResult(null);
 
     try {
-      const response = await axios.post("http://127.0.0.1:5000/predict", {
+      const response = await axios.post("https://phishing-backend-beh4.onrender.com/predict", {
         url: url.trim(),
-      });
+    }
+    );
       setResult(response.data);
     } catch (err) {
       setError("❌ Unable to analyze URL. Server might be down.");
