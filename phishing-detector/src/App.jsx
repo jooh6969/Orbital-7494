@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Forum from "./pages/Forum";
-import Sidebar from "./components/Sidebar"; // We'll create this next
+//import Sidebar from "./components/Sidebar";
 
 function App() {
   return (
