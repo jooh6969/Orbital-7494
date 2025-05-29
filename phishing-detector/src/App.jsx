@@ -6,7 +6,7 @@ import Forum from "./pages/Forum";
 function App() {
   return (
     <BrowserRouter>
-      <Sidebar />
+      {/* <Sidebar /> */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/forum" element={<Forum />} />
