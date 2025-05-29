@@ -37,11 +37,11 @@ const SearchBar = () => {
           value={url}
           onChange={(e) => setUrl(e.target.value)}
           placeholder="🔗 Enter a URL to check"
-          className="border border-gray-400 px-8 py-6 rounded text-[1rem] w-full shadow-md w-[60px]"
+          className="border border-gray-400 px-8 py-6 rounded text-[1rem] w-full shadow-md w-[80px]"
         />
         <button
           type="submit"
-          className="bg-blue-600 text-white px-8 rounded hover:bg-blue-700 text-[1rem] font-semibold shadow-md w-[60px]"
+          className="bg-blue-600 text-white px-8 rounded hover:bg-blue-700 text-[1rem] font-semibold shadow-md w-[80px]"
         >
           {loading ? "Checking..." : "Check URL"}
         </button>
