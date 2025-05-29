@@ -5,7 +5,7 @@ const Home = () => {
   return (
     <div className="flex flex-col items-center justify-start min-h-screen pt-32 px-6 bg-white">
       <h1 className="text-[4rem] font-bold font-serif  mb-6">Home Page</h1>
-      <p className="text-[2rem] font-monospace leading-relaxed mb-8">Welcome to the phishing detector.</p>
+      <p className="text-[2rem] font-mono leading-relaxed mb-8">Welcome to the phishing detector.</p>
       <SearchBar />
 
       <div className="mt-16 flex gap-6">
