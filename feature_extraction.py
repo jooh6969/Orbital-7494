@@ -143,7 +143,7 @@ def extract_features(url):
     longest_path = longest_word_path(url)
 
     ## Phish hints
-    phish_hints = phishing_count(url)
+    phish_hints = phish_count(url)
 
     ## number of hyperlinks
     num_hyperlinks = num_hyper(url)
@@ -174,8 +174,6 @@ def extract_features(url):
 
     features_np = np.array([features])
     return features_np
-
-    
 
 
 
