@@ -10,6 +10,9 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 import csv
 
+load_dotenv
+SCRAPER_API_KEY = os.getenv("SCRAPER_API_KEY")
+
 def length_url(url):
     return len(url)
 
@@ -32,37 +35,41 @@ def phish_count(url):
     return countPhish
 
 def num_hyper(url):
-    try:
-        base_domain = urlparse(url).netloc
-        # make sure you have chrome driver in the path else this will not work      
-        driver = webdriver.Chrome()
-        driver.get(url)
+    api_key = os.getenv("SCRAPERAPI_KEY")
+    api_url = f"http://api.scraperapi.com?api_key={api_key}&url={url}"
 
-        a_elements = driver.find_elements(By.TAG_NAME, "a")
+    try:
+        response = requests.get(api_url, timeout=10)
+        response.raise_for_status()
+        html = response.text
+
+        base_domain = urlparse(url).netloc
+        soup = BeautifulSoup(html, "html.parser")
+        a_tags = soup.find_all("a")
+
         all_links = []
         internal_links = []
-        for link in a_elements:
-            href = link.get_attribute("href")
-            if (link.get_attribute("href")):
+
+        for tag in a_tags:
+            href = tag.get("href")
+            if href:
                 all_links.append(href)
-                full_url = urljoin(url, href)
-                link_domain = urlparse(full_url).netloc
-
-                # 5. Check if it's an internal link (same domain)
+                parsed_href = urlparse(href)
+                link_domain = parsed_href.netloc or base_domain
                 if link_domain == base_domain:
-                    internal_links.append(full_url)
+                    internal_links.append(href)
 
-        driver.quit()
-        len_int = len(internal_links)
-        return len_int, len(all_links) - len_int, len(all_links)
-    
+        total_links = len(all_links)
+        internal = len(internal_links)
+        external = total_links - internal
+        return internal, external, total_links
+
     except requests.RequestException as e:
-        print(f"Error fetching URL given {url}:{e}, try another url")
-        return 0,0,0
+        print(f"Error fetching URL: {e}")
+        return 0, 0, 0
     
 
 def get_domain_age(domain):
-    load_dotenv()
     api_key = os.getenv("WHOIS_API_KEY")
     url = "https://www.whoisxmlapi.com/whoisserver/WhoisService"
 
