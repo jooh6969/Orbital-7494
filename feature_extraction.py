@@ -33,37 +33,36 @@ def phish_count(url):
     return countPhish
 
 def num_hyper(url):
-    api_key = os.getenv("SCRAPERAPI_KEY")
-    api_url = f"http://api.scraperapi.com?api_key={api_key}&url={url}"
-
     try:
-        response = requests.get(api_url, timeout=10)
-        response.raise_for_status()
-        html = response.text
-
         base_domain = urlparse(url).netloc
-        soup = BeautifulSoup(html, "html.parser")
-        a_tags = soup.find_all("a")
-
+        
+        # Use requests instead of Selenium, testing these changes
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+        }
+        response = requests.get(url, headers=headers, timeout=10)
+        response.raise_for_status()
+        
+        soup = BeautifulSoup(response.content, 'html.parser')
+        a_elements = soup.find_all('a', href=True)
+        
         all_links = []
         internal_links = []
-
-        for tag in a_tags:
-            href = tag.get("href")
-            if href:
-                all_links.append(href)
-                parsed_href = urlparse(href)
-                link_domain = parsed_href.netloc or base_domain
-                if link_domain == base_domain:
-                    internal_links.append(href)
-
-        total_links = len(all_links)
-        internal = len(internal_links)
-        external = total_links - internal
-        return internal, external, total_links
-
+        
+        for link in a_elements:
+            href = link['href']
+            all_links.append(href)
+            full_url = urljoin(url, href)
+            link_domain = urlparse(full_url).netloc
+            
+            if link_domain == base_domain:
+                internal_links.append(full_url)
+        
+        len_int = len(internal_links)
+        return len_int, len(all_links) - len_int, len(all_links)
+    
     except requests.RequestException as e:
-        print(f"Error fetching URL: {e}")
+        print(f"Error fetching URL {url}: {e}")
         return 0, 0, 0
     
 
