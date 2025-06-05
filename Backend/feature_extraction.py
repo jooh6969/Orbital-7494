@@ -9,7 +9,8 @@ from datetime import datetime, timezone
 import csv
 
 load_dotenv()  # no more selenium but i think this might be less accurate lol
-SCRAPER_API_KEY = os.getenv("SCRAPER_API_KEY")
+# SCRAPER_API_KEY = os.getenv("SCRAPER_API_KEY")
+# SCRAPER ACC HAS BEEN DELETED, LEAVING CODE HERE INCASE WE NEED TO USE AGAIN
 
 def length_url(url):
     return len(url)
