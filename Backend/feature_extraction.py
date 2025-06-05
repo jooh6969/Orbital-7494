@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 from datetime import datetime, timezone
 import csv
 
-load_dotenv()  # Fixed: Added parentheses
+load_dotenv()  # no more selenium but i think this might be less accurate lol
 SCRAPER_API_KEY = os.getenv("SCRAPER_API_KEY")
 
 def length_url(url):
@@ -32,6 +32,7 @@ def phish_count(url):
         countPhish = sum(1 for row in csv_reader if row[0].lower() in url_lower)
     return countPhish
 
+#changes are here, entire function was rewritten
 def num_hyper(url):
     try:
         base_domain = urlparse(url).netloc
