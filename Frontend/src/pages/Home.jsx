@@ -16,7 +16,7 @@ const Home = () => {
         </div>
 
         {/* Search Bar Section */}
-        <div className="w-full max-w-3xl mb-16">
+        <div className="w-full max-w-xl mb-16">
           <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-8 border border-gray-200">
             <h2 className="text-2xl font-semibold text-gray-800 mb-6 text-center">
               Check URL Safety
