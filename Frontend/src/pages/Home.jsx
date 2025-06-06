@@ -8,18 +8,18 @@ const Home = () => {
       <p className="text-[2rem] font-mono leading-relaxed mb-8">Welcome to the phishing detector.</p>
       <SearchBar />
 
-      <div className="mt-16 flex gap-6">
+      <div className="mt-32 flex flex-col sm:flex-row gap-8 sm:gap-16 justify-center items-center">
         <Link
           to="/"
-          className="bg-blue-600 text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-colors shadow-md"
+          className="bg-blue-600 text-white px-10 py-5 rounded-xl text-xl font-semibold hover:bg-blue-700 hover:scale-105 transition-all duration-200 shadow-lg w-full sm:w-auto min-w-[150px] text-center"
         >
-          Home
+        Home
         </Link>
         <Link
           to="/forum"
-          className="bg-blue-600 text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-colors shadow-md"
+          className="bg-blue-600 text-white px-10 py-5 rounded-xl text-xl font-semibold hover:bg-blue-700 hover:scale-105 transition-all duration-200 shadow-lg w-full sm:w-auto min-w-[150px] text-center"
         >
-          Forum
+        Forum
         </Link>
       </div>
     </div>
