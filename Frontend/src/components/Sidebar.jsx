@@ -1,3 +1,4 @@
+/* This entire chunk of code is useless, will come back to it if need be */
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
