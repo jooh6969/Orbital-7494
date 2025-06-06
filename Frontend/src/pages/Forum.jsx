@@ -56,4 +56,4 @@ const Forum = () => {
   );
 };
 
-export default Forum;s
+export default Forum;
