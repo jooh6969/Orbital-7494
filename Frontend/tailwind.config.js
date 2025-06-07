@@ -11,8 +11,8 @@ export default {
       },
       colors: {
         nord: {
-          blue: "#1e293b",
-          darkBlue: "#0f172a",
+          blue: "#2563eb",
+          bg: "#f9fafb",
         },
       },
     },
