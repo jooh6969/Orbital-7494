@@ -70,12 +70,8 @@ const Forum = () => {
       </div>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-6 mt-auto">
-        <div className="max-w-7xl mx-auto px-4 text-center">
-          <p className="text-gray-400">
-            © 2025 Phishing Detector. Protecting users from malicious websites.
-          </p>
-        </div>
+      <footer className="text-gray-400 text-center text-sm py-6">
+        © 2025 Phishing Detector. Protecting users from malicious websites.
       </footer>
     </div>
   );
