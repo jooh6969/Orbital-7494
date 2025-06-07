@@ -41,10 +41,10 @@ const Forum = () => {
 
         {/* Main Heading */}
         <div className="text-center mb-12">
-          <h1 className="text-5xl sm:text-6xl font-bold text-gray-900 mb-6">
+          <h1 className="text-3xl sm:text-4xl font-semibold text-gray-800 mb-4">
             Community Forum
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-gray-600 text-base sm:text-lg mb-8">
             Feel free to flag out any potential phishing sites! Help protect the community by sharing suspicious URLs and discussing phishing tactics.
           </p>
         </div>
