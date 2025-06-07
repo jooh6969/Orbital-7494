@@ -16,11 +16,10 @@ const SearchBar = () => {
     try {
       const response = await axios.post("https://phishing-backend-beh4.onrender.com/predict", {
         url: url.trim(),
-    }
-    );
+      });
       setResult(response.data);
     } catch (err) {
-      setError("❌ Unable to analyze URL. Server might be down.");
+      setError("Unable to analyze URL. Please try again later.");
       console.error(err);
     } finally {
       setLoading(false);
@@ -28,34 +27,40 @@ const SearchBar = () => {
   };
 
   return (
-    <div className="p-12 max-w-4xl mx-auto">
+    <div className="w-full">
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col sm:flex-row gap-6 mb-10"
+        className="flex flex-col sm:flex-row gap-4"
       >
         <input
           type="text"
           value={url}
           onChange={(e) => setUrl(e.target.value)}
-          placeholder="🔗 Enter a URL to check"
-          className="border border-gray-400 px-8 py-6 rounded text-[1rem] w-full shadow-md flex-1"
+          placeholder="Enter your URL here"
+          className="flex-1 px-6 py-4 border border-gray-300 rounded-lg text-base focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
         <button
           type="submit"
-          className="bg-blue-600 text-white px-8 py-6 rounded hover:bg-blue-700 text-[1rem] font-semibold shadow-md"
+          className="bg-nord-blue text-white px-8 py-4 rounded-lg text-base font-medium hover:bg-blue-700 transition duration-150"
         >
-          {loading ? "Checking..." : "Check URL  "}
+          {loading ? "Checking..." : "Analyze"}
         </button>
       </form>
 
-      {error && <p className="text-red-600 text-xl font-medium">{error}</p>}
+      {/* Error */}
+      {error && (
+        <div className="mt-4 text-red-600 text-sm text-left">
+          {error}
+        </div>
+      )}
 
+      {/* Result */}
       {result && (
-        <div className="mt-8 p-8 border border-gray-300 rounded bg-gray-100 text-2xl shadow-sm">
-          <p className="font-bold">
-            🔍 <strong>Result:</strong> {result.result}
+        <div className="mt-6 p-6 border border-gray-200 rounded-lg bg-white text-left shadow-sm">
+          <p className="text-base font-medium text-gray-800">
+            Result: <span className="font-semibold">{result.result}</span>
           </p>
-          <p className="text-gray-700 mt-2 text-xl">
+          <p className="text-sm text-gray-600 mt-2">
             Confidence: {result.confidence}%
           </p>
         </div>
@@ -65,4 +70,5 @@ const SearchBar = () => {
 };
 
 export default SearchBar;
+
 
