@@ -1,6 +1,6 @@
 import { useState } from "react";
 import SearchBar from "../components/SearchBar";
-import { Link } from "react-router-dom"; // ✅ required for redirection
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [activeTab, setActiveTab] = useState("link");
@@ -9,17 +9,17 @@ const Home = () => {
     <div className="min-h-screen bg-nord-bg font-sans">
       <main className="flex flex-col items-center justify-start px-4 py-20 sm:py-32 max-w-xl mx-auto text-center">
         {/* Tabs with navigation */}
-        <div className="flex items-center gap-8 mb-10">
+        <div className="flex mb-8">
           <Link
             to="/"
-            className={`flex flex-col items-center text-sm sm:text-base ${
+            className={`flex items-center gap-2 px-6 py-3 font-medium transition-colors duration-200 border-b-2 ${
               activeTab === "link"
-                ? "text-nord-blue font-semibold"
-                : "text-gray-500 hover:text-gray-700"
+                ? "text-blue-600 border-blue-600"
+                : "text-gray-500 border-transparent hover:text-gray-700"
             }`}
             onClick={() => setActiveTab("link")}
           >
-            <svg className="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
                 d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
               />
@@ -28,16 +28,16 @@ const Home = () => {
           </Link>
           <Link
             to="/forum"
-            className={`flex flex-col items-center text-sm sm:text-base ${
+            className={`flex items-center gap-2 px-6 py-3 font-medium transition-colors duration-200 border-b-2 ${
               activeTab === "forum"
-                ? "text-nord-blue font-semibold"
-                : "text-gray-500 hover:text-gray-700"
+                ? "text-blue-600 border-blue-600"
+                : "text-gray-500 border-transparent hover:text-gray-700"
             }`}
             onClick={() => setActiveTab("forum")}
           >
-            <svg className="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2z"
+                d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2z"
               />
             </svg>
             Community Forum
