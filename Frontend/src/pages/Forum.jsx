@@ -58,7 +58,6 @@ const Forum = () => {
             <p className="text-gray-600 text-center text-lg mb-6">
               Share and discuss potential phishing threats with the community.
             </p>
-            {/* You can add forum content/posts here later */}
             <div className="space-y-4">
               <div className="p-4 bg-gray-50 rounded-lg">
                 <p className="text-gray-500 text-center">
@@ -67,22 +66,6 @@ const Forum = () => {
               </div>
             </div>
           </div>
-        </div>
-
-        {/* Navigation Buttons */}
-        <div className="flex flex-col sm:flex-row gap-6 sm:gap-8 justify-center items-center">
-          <Link
-            to="/"
-            className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-10 py-4 rounded-xl text-lg font-semibold hover:from-blue-700 hover:to-blue-800 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl w-full sm:w-auto min-w-[180px] text-center"
-          >
-            Home
-          </Link>
-          <Link
-            to="/forum"
-            className="bg-gradient-to-r from-purple-600 to-purple-700 text-white px-10 py-4 rounded-xl text-lg font-semibold hover:from-purple-700 hover:to-purple-800 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl w-full sm:w-auto min-w-[180px] text-center"
-          >
-            Chat Forum
-          </Link>
         </div>
       </div>
 
@@ -99,3 +82,4 @@ const Forum = () => {
 };
 
 export default Forum;
+
