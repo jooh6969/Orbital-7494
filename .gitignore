@@ -1,0 +1,28 @@
+# Logs
+logs
+*.log
+
+# Dependency folders
+node_modules/
+Frontend/node_modules/
+Backend/node_modules/
+
+# Build outputs
+dist/
+Frontend/dist/
+dist-ssr
+
+# Local env files
+*.local
+.env
+Frontend/.env
+Backend/.env
+
+# Editor configs
+.vscode/
+.idea
+.DS_Store
+
+# Lockfiles (if accidentally created at root)
+package-lock.json
+
