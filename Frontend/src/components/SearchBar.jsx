@@ -43,7 +43,7 @@ const SearchBar = () => {
           type="submit"
           className="bg-nord-blue text-white px-8 py-4 rounded-lg text-base font-medium hover:bg-blue-700 transition duration-150"
         >
-          {loading ? "Checking..." : "Analyze"}
+          {loading ? "Checking..." : "Analyse"}
         </button>
       </form>
 

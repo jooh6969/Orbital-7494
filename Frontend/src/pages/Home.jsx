@@ -60,7 +60,7 @@ const Home = () => {
 
       {/* Footer */}
       <footer className="text-gray-400 text-center text-sm py-6">
-        © 2025 Phishing Detector. Protecting users from malicious websites.
+        © 2025 Phishing Detector. We aim to catch suspicious websites.
       </footer>
     </div>
   );

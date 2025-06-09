@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 from datetime import datetime, timezone
 import csv
 
-load_dotenv()  # no more selenium but i think this might be less accurate lol
+load_dotenv()  # no more selenium but i think this might be less accurate
 # SCRAPER_API_KEY = os.getenv("SCRAPER_API_KEY")
 # SCRAPER ACC HAS BEEN DELETED, LEAVING CODE HERE INCASE WE NEED TO USE AGAIN
 
@@ -38,9 +38,11 @@ def num_hyper(url):
     try:
         base_domain = urlparse(url).netloc
         
-        # Use requests instead of Selenium
+        # Use requests instead of Selenium, additional compatibility pushed into headers to mimic browser
         headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36'
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 
+            'Accept-Language': 'en-GB,en;q=0.5',
+            'DNT': '1'
         }
         response = requests.get(url, headers=headers, timeout=10)
         response.raise_for_status()
