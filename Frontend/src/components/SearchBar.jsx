@@ -6,18 +6,25 @@ const SearchBar = () => {
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [llmResult, setLlmResult] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError("");
     setResult(null);
+    setLlmResult(null);
 
     try {
       const response = await axios.post("https://phishing-backend-beh4.onrender.com/predict", {
         url: url.trim(),
       });
       setResult(response.data);
+
+      const llmResponse = await axios.post("https://phishing-backend-beh4.onrender.com/llm-analyze", {
+        text: url.trim(), 
+      });
+      setLlmResult(llmResponse.data);
     } catch (err) {
       setError("Unable to analyze URL. Please try again later.");
       console.error(err);
@@ -62,6 +69,34 @@ const SearchBar = () => {
           </p>
           <p className="text-sm text-gray-600 mt-2">
             Confidence: {result.confidence}%
+          </p>
+        </div>
+      )}
+
+      {llmResult && (
+        <div className="mt-6 p-6 border border-blue-100 rounded-lg bg-blue-50 text-left shadow-sm">
+          <p className="text-base font-medium text-blue-800">
+            Gemini LLM Classification: <span className="font-semibold">{llmResult.classification}</span>
+          </p>
+          <p className="text-sm text-blue-700 mt-1">
+            Type of Scam: {llmResult["type of scam"]}
+          </p>
+          <p className="text-sm text-blue-700 mt-1">
+            Reasoning: {llmResult.reasoning}
+          </p>
+          <p className="text-sm text-blue-700 mt-1">
+            Advice: {llmResult.advice}
+          </p>
+          <p className="text-sm text-blue-700 mt-1">
+            Official URL:{" "}
+            <a
+              href={llmResult.official_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline text-blue-600"
+            >
+              {llmResult.official_url}
+            </a>
           </p>
         </div>
       )}
