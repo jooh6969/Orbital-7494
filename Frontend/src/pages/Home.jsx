@@ -26,6 +26,7 @@ const Home = () => {
             </svg>
             Link Checker
           </Link>
+
           <Link
             to="/forum"
             className={`flex items-center gap-2 px-6 py-3 font-medium transition-colors duration-200 border-b-2 ${
@@ -41,6 +42,30 @@ const Home = () => {
               />
             </svg>
             Community Forum
+          </Link>
+
+          <Link
+            to="/reality-mode"
+            state={{ fromTab: "home" }}
+            className={`flex items-center gap-2 px-6 py-3 font-medium transition-colors duration-200 border-b-2 ${
+              activeTab === "reality"
+                ? "text-blue-600 border-blue-600"
+                : "text-gray-500 border-transparent hover:text-gray-700"
+            }`}
+            onClick={() => setActiveTab("reality")}
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M2 16.5V15a5 5 0 015-5h10a5 5 0 015 5v1.5a2.5 2.5 0 01-5 0V15H7v1.5a2.5 2.5 0 01-5 0z"
+              />
+              <circle cx="8.5" cy="13" r="1" fill="currentColor" />
+              <circle cx="15.5" cy="13" r="1" fill="currentColor" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 10v.01M15 10v.01" />
+            </svg>
+            Reality Mode
           </Link>
         </div>
 
@@ -67,4 +92,5 @@ const Home = () => {
 };
 
 export default Home;
+
 
