@@ -6,22 +6,20 @@ from dotenv import load_dotenv
 from google.genai import types
 
 
-def generate(input):
+def generate(input_text):
     load_dotenv()
-    client = genai.Client(
-        api_key= os.environ.get("GEMINI_API_KEY"),
-    )
+
+    client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY"))
 
     model = "gemini-2.5-flash-preview-04-17"
     contents = [
         types.Content(
             role="user",
-            parts=[
-                types.Part.from_text(text=f"Analyse this text : \n{input}"),
-            ],
-        ),
+            parts=[types.Part.from_text(text=f"Analyse this text : \n{input_text}")]
+        )
     ]
-    generate_content_config = types.GenerateContentConfig(
+
+    config = types.GenerateContentConfig(
         response_mime_type="text/plain",
         system_instruction=[
             types.Part.from_text(text="""You are a phishing detection assistant. Use your prior knowledge on how official organisations will handle such things and whether it is is likely to be phishing or not based off cross referencing 
@@ -54,15 +52,16 @@ Only respond in the following JSON format:
   \"official_url\": \"...\"
 }
 """),
-        ],
+        ]
     )
 
+    result_text = ""
     for chunk in client.models.generate_content_stream(
-        model=model,
-        contents=contents,
-        config=generate_content_config,
+        model=model, contents=contents, config=config
     ):
-        print(chunk.text, end="")
+        result_text += chunk.text
+
+    return result_text
 
 ## For Testing
 if __name__ == "__main__":

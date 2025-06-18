@@ -33,21 +33,13 @@ def llm_analyze():
         return jsonify({"error": "No text provided"}), 400
 
     try:
-        import io
-        import sys
-        import json
         from phish_llm import generate
+        import json
 
-        buffer = io.StringIO()
-        sys.stdout = buffer  
-        generate(input_text)
-        sys.stdout = sys.__stdout__  
-        output = buffer.getvalue()
-
-        json_output = json.loads(output)  
+        output = generate(input_text)         
+        json_output = json.loads(output)      
         return jsonify(json_output)
     except Exception as e:
-        sys.stdout = sys.__stdout__  
         return jsonify({"error": str(e)}), 500
     
 if __name__ == '__main__':
