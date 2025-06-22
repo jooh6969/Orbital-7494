@@ -1,14 +1,14 @@
 
+import base64
 import os
-from dotenv import load_dotenv
 import google.generativeai as genai
+from dotenv import load_dotenv
+from google.generativeai import types
 
-from google.generativeai.types import Content, Part, GenerateContentConfig
 
 def generate(input_text):
     load_dotenv()
-    genai.configure(api_key=os.environ.get("GEMINI_API_KEY")) #api call was wrong
-
+    genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
     model = genai.GenerativeModel("gemini-2.5-flash-preview-04-17")
     contents = [
         types.Content(
