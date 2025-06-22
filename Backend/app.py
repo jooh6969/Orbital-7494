@@ -29,7 +29,7 @@ def predict():
 @cross_origin()
 def llm_analyze():
     if request.method == 'OPTIONS':
-        return '', 200
+        return '', 200 #seeing if acknowledging the req can debug this
     
     data = request.get_json()
     input_text = data.get("text", "")
