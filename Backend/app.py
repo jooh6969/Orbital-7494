@@ -25,8 +25,12 @@ def predict():
     confidence = max(probability)
     return jsonify({'result': "Phising" if int(prediction) == 1 else "Not Phishing", 'confidence' : round(confidence * 100 , 2)})
 
-@app.route('/llm-analyze', methods=['POST'])
+@app.route('/llm-analyze', methods=['POST', 'OPTIONS'])
+@cross_origin()
 def llm_analyze():
+    if request.method == 'OPTIONS':
+        return '', 200
+    
     data = request.get_json()
     input_text = data.get("text", "")
     if not input_text:
