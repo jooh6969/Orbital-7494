@@ -1,9 +1,9 @@
 
 import base64
 import os
-from google import genai
+import google.generativeai as genai
 from dotenv import load_dotenv
-from google.genai import types
+from google.generativeai import types
 
 
 def generate(input_text):
