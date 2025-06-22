@@ -28,6 +28,7 @@ def predict():
 @app.route('/llm-analyze', methods=['POST', 'OPTIONS'])
 @cross_origin()
 def llm_analyze():
+    print("hi i hit this end point why no working?")
     if request.method == 'OPTIONS':
         return '', 200 #seeing if acknowledging the req can debug this
     
