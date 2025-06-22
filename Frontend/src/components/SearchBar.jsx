@@ -12,8 +12,8 @@ const SearchBar = () => {
     e.preventDefault();
     setLoading(true);
     setError("");
-    setResult(null);
-    setLlmResult(null);
+    setResult(null); //return result of ai
+    setLlmResult(null); //return result of llm
 
     try {
       const response = await axios.post("https://phishing-backend-beh4.onrender.com/predict", {

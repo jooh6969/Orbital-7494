@@ -3,9 +3,11 @@ from feature_extraction import extract_features
 from phish_llm import generate
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+from flask_cors import cross_origin
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "https://elaborate-druid-a59398.netlify.app"}}, supports_credentials=True)
+
 
 with open("phishing_model.pkl", "rb") as f:
     model = pickle.load(f)
@@ -14,6 +16,7 @@ test_url = "http://google.com"
 
 
 @app.route('/predict', methods=['POST'])
+@cross_origin()
 def predict():
     url = request.json.get("url")
     if not url:
