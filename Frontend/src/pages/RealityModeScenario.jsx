@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 export default function RealityModeScenario() {
@@ -7,12 +7,13 @@ export default function RealityModeScenario() {
   const [feedbackText, setFeedbackText] = useState("");
   const [isCorrectAnswer, setIsCorrectAnswer] = useState(false);
   const [quizCompleted, setQuizCompleted] = useState(false);
+  const [selectedQuestions, setSelectedQuestions] = useState([]);
   const navigate = useNavigate();
   const location = useLocation();
   const fromTab = location.state?.fromTab || "home";
 
-  // qn bank + ans, 10 now shd include more to randomise and rotate
-  const questions = [
+  // Full question bank (10 questions)
+  const allQuestions = [
     {
       title: "Phishing Email",
       scenario: "You receive an email from 'your bank' asking you to verify your account by clicking a link. What do you do?",
@@ -105,7 +106,22 @@ export default function RealityModeScenario() {
     }
   ];
 
-  const currentQ = questions[currentQuestion];
+  // Shuffle and select 5 random questions when component mounts
+  useEffect(() => {
+    const shuffleArray = (array) => {
+      const shuffled = [...array];
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      return shuffled;
+    };
+
+    const shuffledQuestions = shuffleArray(allQuestions);
+    setSelectedQuestions(shuffledQuestions.slice(0, 5));
+  }, []);
+
+  const currentQ = selectedQuestions[currentQuestion];
 
   // Show feedback modal
   const showFeedback = (isCorrect, explanation) => {
@@ -120,14 +136,25 @@ export default function RealityModeScenario() {
     
     if (isCorrectAnswer) {
       // If correct and not the last question, move to next question
-      if (currentQuestion < questions.length - 1) {
+      if (currentQuestion < selectedQuestions.length - 1) {
         setCurrentQuestion(currentQuestion + 1);
       } else {
         // Completed all questions successfully
         setQuizCompleted(true);
       }
     } else {
-      // If incorrect, restart the quiz
+      // If incorrect, restart the quiz with new random questions
+      const shuffleArray = (array) => {
+        const shuffled = [...array];
+        for (let i = shuffled.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+        return shuffled;
+      };
+      
+      const shuffledQuestions = shuffleArray(allQuestions);
+      setSelectedQuestions(shuffledQuestions.slice(0, 5));
       setCurrentQuestion(0);
     }
   };
@@ -137,8 +164,19 @@ export default function RealityModeScenario() {
     navigate(fromTab === "home" ? "/" : `/${fromTab}`);
   };
 
-  // Restart quiz
+  // Restart quiz with new random questions
   const handleRestart = () => {
+    const shuffleArray = (array) => {
+      const shuffled = [...array];
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      return shuffled;
+    };
+    
+    const shuffledQuestions = shuffleArray(allQuestions);
+    setSelectedQuestions(shuffledQuestions.slice(0, 5));
     setCurrentQuestion(0);
     setQuizCompleted(false);
   };
@@ -147,6 +185,15 @@ export default function RealityModeScenario() {
   const handleReturnHome = () => {
     navigate(fromTab === "home" ? "/" : `/${fromTab}`);
   };
+
+  // Don't render anything if questions haven't been selected yet
+  if (selectedQuestions.length === 0) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center">
+        <div className="text-white text-xl">Loading...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 font-sans">
@@ -163,16 +210,35 @@ export default function RealityModeScenario() {
         {/* Progress Bar */}
         {!quizCompleted && (
           <div className="absolute top-6 right-6 bg-black bg-opacity-70 px-4 py-2 rounded-full text-sm">
-            Question {currentQuestion + 1} / {questions.length}
+            Question {currentQuestion + 1} / {selectedQuestions.length}
           </div>
         )}
 
-        <div className="max-w-xl mx-auto pt-24 pb-10 space-y-10 text-center">
+        {/* Header with Icon and Title */}
+        <div className="text-center pt-8 pb-6">
+          <div className="flex items-center justify-center gap-3 mb-2">
+            <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M2 16.5V15a5 5 0 015-5h10a5 5 0 015 5v1.5a2.5 2.5 0 01-5 0V15H7v1.5a2.5 2.5 0 01-5 0z"
+              />
+              <circle cx="8.5" cy="13" r="1" fill="currentColor" />
+              <circle cx="15.5" cy="13" r="1" fill="currentColor" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 10v.01M15 10v.01" />
+            </svg>
+            <h1 className="text-2xl font-bold text-white drop-shadow-lg">Reality Mode</h1>
+          </div>
+          <p className="text-sm text-gray-300 opacity-90">Test your phishing awareness skills</p>
+        </div>
+
+        <div className="max-w-xl mx-auto pt-8 pb-10 space-y-10 text-center">
           
           {!quizCompleted ? (
             <>
-              {/* Title */}
-              <h1 className="text-3xl sm:text-4xl font-bold drop-shadow-lg">{currentQ.title}</h1>
+              {/* Current Question Title */}
+              <h2 className="text-3xl sm:text-4xl font-bold drop-shadow-lg">{currentQ.title}</h2>
               <p className="text-lg opacity-90 drop-shadow leading-relaxed">
                 {currentQ.scenario}
               </p>
@@ -193,9 +259,9 @@ export default function RealityModeScenario() {
           ) : (
             /* Quiz Completion Screen */
             <div className="space-y-6">
-              <h1 className="text-4xl font-bold text-green-400 drop-shadow-lg">🎉 Congratulations!</h1>
+              <h2 className="text-4xl font-bold text-green-400 drop-shadow-lg">🎉 Congratulations!</h2>
               <p className="text-xl opacity-90 drop-shadow">
-                You've successfully completed all 10 phishing awareness questions!
+                You've successfully completed all 5 phishing awareness questions!
               </p>
               <p className="text-lg opacity-80 drop-shadow">
                 You're now better equipped to identify and avoid phishing attempts.
@@ -232,7 +298,7 @@ export default function RealityModeScenario() {
                 }`}
               >
                 {isCorrectAnswer 
-                  ? (currentQuestion === questions.length - 1 ? "Complete Quiz" : "Next Question")
+                  ? (currentQuestion === selectedQuestions.length - 1 ? "Complete Quiz" : "Next Question")
                   : "Restart Quiz"
                 }
               </button>
