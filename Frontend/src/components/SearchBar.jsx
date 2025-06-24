@@ -17,6 +17,7 @@ const SearchBar = () => {
 
     try {
       const response = await axios.post("https://phishing-backend-beh4.onrender.com/predict", {
+        console.log("LLM Response:", response.data);
         url: url.trim(),
       });
       setResult(response.data);
@@ -27,7 +28,7 @@ const SearchBar = () => {
       setLlmResult(llmResponse.data);
     } catch (err) {
       setError("Unable to analyze URL. Please try again later.");
-      console.error(err);
+      console.error("LLM Analyze Error:", err);
     } finally {
       setLoading(false);
     }
