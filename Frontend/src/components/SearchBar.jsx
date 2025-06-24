@@ -17,14 +17,15 @@ const SearchBar = () => {
 
     try {
       const response = await axios.post("https://phishing-backend-beh4.onrender.com/predict", {
-        console.log("LLM Response:", response.data);
         url: url.trim(),
       });
+      console.log("Predict Response:", response.data);
       setResult(response.data);
 
       const llmResponse = await axios.post("https://phishing-backend-beh4.onrender.com/llm-analyze", {
         text: url.trim(), 
       });
+      console.log("LLM Response:", llmResponse.data);
       setLlmResult(llmResponse.data);
     } catch (err) {
       setError("Unable to analyze URL. Please try again later.");
